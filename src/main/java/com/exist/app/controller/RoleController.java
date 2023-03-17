@@ -15,6 +15,12 @@ public class RoleController {
 	@Autowired
 	public RoleServiceImpl roleServiceImpl;
 	
+	@GetMapping("/roles")
+	public List<Role> getRoles() {
+		return roleServiceImpl.getRoles();
+	}
+	
+	
 	@GetMapping("/roles/{personId}")
 	public List<Role> getRoleByPersonId(@PathVariable("personId") long personId) {
 		return roleServiceImpl.getRoleByPersonId(personId);

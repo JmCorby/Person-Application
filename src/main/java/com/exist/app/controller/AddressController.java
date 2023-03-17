@@ -19,16 +19,16 @@ public class AddressController {
 
 	@GetMapping("/address/{id}")
 	public Address getAddress(@PathVariable("id")long id) {
-		return addressServiceImpl.getAddress(id);
+		return addressServiceImpl.getAddresses(id);
 	}
 	
-	@GetMapping("/address")
+	@GetMapping("/addresses")
 	public List<Address> getAllAddress() {
 		return addressServiceImpl.getAllAddresses();
 	}
 	
-	@PostMapping("/address/saveAddress")
-	public Address saveAddress(@RequestBody Address address) {
-		return addressServiceImpl.saveAddress(address);
-	}
+//	@PostMapping("/address/saveAddress")
+//	public Address saveAddress(@RequestBody Address address) {
+//		return addressServiceImpl.saveAddress(address);
+//	}
 }

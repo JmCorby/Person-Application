@@ -17,6 +17,15 @@ public class RoleServiceImpl {
 	@Autowired
 	public PersonRepository personRepository;
 	
+	public List<Role> getRoles() {
+		try {
+			var result = roleRepository.findAll();
+			return result;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	
 	public List<Role> getRoleByPersonId(long personId) {
 		return roleRepository.findByPersonId(personId);
 	}

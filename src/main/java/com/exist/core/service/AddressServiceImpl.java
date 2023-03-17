@@ -18,7 +18,7 @@ public class AddressServiceImpl {
 	@Autowired
 	public PersonRepository personRepository;
 	
-	public Address getAddress(long id) {
+	public Address getAddresses(long id) {
 		return addressRepository.findById(id).orElse(null);
 	}
 	
@@ -31,10 +31,10 @@ public class AddressServiceImpl {
 		}
 	}
 	
-	public Address saveAddress(Address address) {
-			var person = personRepository.findById(address.person.id).orElse(null);
-			address.person = person;
-			return addressRepository.save(address);
-	}
+//	public Address saveAddress(Address address) {
+//			var person = personRepository.findById(address.person.id).orElse(null);
+//			address.person = person;
+//			return addressRepository.save(address);
+//	}
 
 }

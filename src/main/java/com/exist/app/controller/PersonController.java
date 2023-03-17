@@ -15,9 +15,18 @@ public class PersonController {
 	@Autowired
 	public PersonServiceImpl personServiceImpl;
 	
+	@GetMapping("/persons/{id}")
+	public Person getPersonById(@PathVariable("id")long id) {
+		return personServiceImpl.getPersonById(id);
+	}
+	
 	@GetMapping("/persons")
-	public List<Person> getPerson() {
-		return personServiceImpl.getPerson();
+	public List<Person> getPersons() {
+		try {
+			return personServiceImpl.getPersons();
+		} catch (Exception e) {
+			return null;
+		}
 	}
 	
 	@PostMapping("/person/getbyname")

@@ -1,19 +1,27 @@
 package com.exist.core.model;
 
+import java.io.Serializable;
 import java.util.*;
+
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Entity
 @Table(name = "Persons")
-public class Person {
-	@OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
-	public List<Address> address;
+public class Person implements Serializable {
+	@OneToOne(mappedBy = "person", fetch = FetchType.LAZY)
+	@JsonManagedReference
+	@JoinColumn(name = "id", nullable = true, insertable = true, updatable = false)
+	public Address address;
 
-	@OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "id", fetch = FetchType.LAZY)
+	@JsonManagedReference
 	public List<Role> roles;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", updatable = false, columnDefinition = "serial")
 	public long id;
 	
 	@Column(name = "first_name")
@@ -33,6 +41,7 @@ public class Person {
 
 	@Column(name = "birthday")
 	@Temporal(TemporalType.DATE)
+	@JsonFormat(pattern = "yyyy/MM/dd")
 	public Date birthday;
 	
 	@Column(name = "gwa")
@@ -40,6 +49,7 @@ public class Person {
 	
 	@Column(name = "date_hired")
 	@Temporal(TemporalType.DATE)
+	@JsonFormat(pattern = "yyyy/MM/dd")
 	public Date dateHired;
 	
 	@Column(name = "landline")

@@ -14,8 +14,17 @@ public class PersonServiceImpl {
 	@Autowired
 	public PersonRepository personRepository;
 	
-	public List<Person> getPerson() {
-		return personRepository.findAll();
+	public Person getPersonById(long id) {
+		return personRepository.findById(id);
+	}
+	
+	public List<Person> getPersons() {
+		try {
+			return personRepository.findAll();
+		} catch (Throwable e) {
+			return null;
+		}
+		
 	}
 	
 	public Person getPersonByName(Person person) {
