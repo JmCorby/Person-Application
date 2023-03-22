@@ -31,13 +31,25 @@ public class RoleServiceImpl {
 	}
 	
 	public Role saveRole(Role role) {
-		Role first = roleRepository.findByRoleName(role.roleName).stream().findFirst().orElse(null);
-		if (first != null) {
-			return first;
+		Role validate = roleRepository.findByRoleName(role.roleName).stream().findFirst().orElse(null);
+		if (validate != null) {
+			return validate;
 		} else {
 			roleRepository.save(role);
 			return role;
 		}
+	}
+	
+	public void deleteRoleById(long id) {
+		try {
+			personRepository.deleteById(id);
+		} catch (Exception e) {
+			System.out.println("Can not delete role since Person still exists.");
+		}
+	}
+	
+	public void updateRole(Role role) {
+		roleRepository.save(role);
 	}
 }
 

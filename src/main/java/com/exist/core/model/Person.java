@@ -10,12 +10,11 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "Persons")
 public class Person implements Serializable {
-	@OneToOne(mappedBy = "person", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "person", fetch = FetchType.LAZY)
 	@JsonManagedReference
-	@JoinColumn(name = "id", nullable = true, insertable = true, updatable = false)
-	public Address address;
+	public List<Contact> contacts;
 
-	@OneToMany(mappedBy = "id", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "person", fetch = FetchType.LAZY)
 	@JsonManagedReference
 	public List<Role> roles;
 	
@@ -52,13 +51,31 @@ public class Person implements Serializable {
 	@JsonFormat(pattern = "yyyy/MM/dd")
 	public Date dateHired;
 	
-	@Column(name = "landline")
-	public String landline;
-	
-	@Column(name = "mobile_number")
-	public String mobileNumber;
-	
 	@Column(name = "employment_status")
 	public String employmentStatus;
+	
+	@Column(name = "street_number")
+	public long streetNumber;
+	
+	@Column(name = "zipcode")
+	public long zipcode;
+	
+	@Column(name = "barangay")
+	public String barangay;
+	
+	@Column(name = "city")
+	public String city;
+	
+	public double getGeneralWeightedAverage() {
+		return generalWeightedAverage;
+	}
+	
+	public Date getDateHired() {
+		return dateHired;
+	}
+	
+	public String getLastName() {
+		return lastName;
+	}
 	
 }

@@ -8,6 +8,6 @@ import com.exist.core.model.Person;
 
 @Repository
 public interface PersonRepository extends JpaRepository <Person, Long>{
-	List<Person> findByFirstNameAndLastName(String firstName, String lastName);
+	List<Person> findByFirstNameAndLastNameAndMiddleName(String firstName, String lastName, String middleName);
 	Person findById(long id);
 }
