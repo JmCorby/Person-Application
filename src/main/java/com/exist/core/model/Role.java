@@ -1,27 +1,24 @@
 package com.exist.core.model;
 
-import java.io.*;
+import java.util.List;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.*;
 
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Entity
 @Table(name = "Roles")
-public class Role implements Serializable{
+public class Role {
 	
-	@ManyToOne
-	@JsonBackReference
-	@JoinColumn(name = "person_id")
-	public Person person;
+	@OneToMany(mappedBy = "role", fetch = FetchType.LAZY)
+	public List<PersonRole> personRoles;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", updatable = false, columnDefinition = "serial")
 	public long id;
 	
-	@Column(name = "role_name")
-	public String roleName;
-
+	@Column(name = "role", unique = true)
+	public String role;
 }

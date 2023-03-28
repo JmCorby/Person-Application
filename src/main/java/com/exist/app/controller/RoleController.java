@@ -2,9 +2,8 @@ package com.exist.app.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import com.exist.core.model.Role;
 import com.exist.core.service.RoleServiceImpl;
 
@@ -21,28 +20,21 @@ public class RoleController {
 		return roleServiceImpl.getRoles();
 	}
 	
-	//Get role by id
-	@GetMapping("/roles/{personId}")
-	public List<Role> getRoleByPersonId(@PathVariable("personId") long personId) {
-		return roleServiceImpl.getRoleByPersonId(personId);
-	}
-	
 	//Add role
 	@PostMapping("/roles/add")
-	public Role saveRole(@RequestBody Role role) {
-		return roleServiceImpl.saveRole(role);
-	}
-	
-	//Delete role
-	@DeleteMapping("role/delete/{id}")
-	public void deleteRoleById(@PathVariable("id")long id) {
-		roleServiceImpl.deleteRoleById(id);
+	public Role addRole(@RequestBody Role role) {
+		return roleServiceImpl.addRole(role);
 	}
 	
 	//Update role
-	@PutMapping("role/update") 
-	public void updateRole(Role role) {
-		roleServiceImpl.saveRole(role);
+	@PutMapping("roles/update")
+	public void updateRole(@RequestBody Role role) {
+		roleServiceImpl.addRole(role);
 	}
-
+	
+	//Delete role
+	@DeleteMapping("roles/delete/{id}")
+	public void deleteRole(@PathVariable("id") long id) {
+		roleServiceImpl.deleteRoleById(id);
+	}
 }

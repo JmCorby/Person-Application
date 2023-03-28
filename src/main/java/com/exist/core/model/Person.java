@@ -16,7 +16,7 @@ public class Person implements Serializable {
 
 	@OneToMany(mappedBy = "person", fetch = FetchType.LAZY)
 	@JsonManagedReference
-	public List<Role> roles;
+	public List<PersonRole> personRoles;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

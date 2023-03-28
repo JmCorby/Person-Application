@@ -1,37 +1,24 @@
 package com.exist.core.service;
 
-import java.util.List;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.*;
-import org.springframework.stereotype.Service;
-import com.exist.core.model.Role;
-import com.exist.core.repo.PersonRepository;
+import org.springframework.stereotype.*;
+
 import com.exist.core.repo.RoleRepository;
+import com.exist.core.model.Role;
 
 @Service
 public class RoleServiceImpl {
-	
 	@Autowired
 	public RoleRepository roleRepository;
-	
-	@Autowired
-	public PersonRepository personRepository;
-	
+
 	public List<Role> getRoles() {
-		try {
-			var result = roleRepository.findAll();
-			return result;
-		} catch (Exception e) {
-			return null;
-		}
+		return roleRepository.findAll();
 	}
 	
-	public List<Role> getRoleByPersonId(long personId) {
-		return roleRepository.findByPersonId(personId);
-	}
-	
-	public Role saveRole(Role role) {
-		Role validate = roleRepository.findByRoleName(role.roleName).stream().findFirst().orElse(null);
+	public Role addRole(Role role) {
+		Role validate = roleRepository.findByRoleIgnoreCase(role.role).stream().findFirst().orElse(null);
 		if (validate != null) {
 			return validate;
 		} else {
@@ -42,17 +29,10 @@ public class RoleServiceImpl {
 	
 	public void deleteRoleById(long id) {
 		try {
-			personRepository.deleteById(id);
+			roleRepository.deleteById(id);
 		} catch (Exception e) {
-			System.out.println("Can not delete role since Person still exists.");
+			System.out.println("Can not delete role");
 		}
 	}
-	
-	public void updateRole(Role role) {
-		roleRepository.save(role);
-	}
+
 }
-
-
-
-
