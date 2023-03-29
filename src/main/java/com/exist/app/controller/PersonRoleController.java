@@ -15,10 +15,21 @@ public class PersonRoleController {
 	@Autowired
 	public PersonRoleServiceImpl personRoleServiceImpl;
 	
-	//Add role
-	@PostMapping("/personRoles/add")
+	//Add person role
+	@PostMapping("/personroles/add")
 	public PersonRole addPersonRole(@RequestBody PersonRole personRole) {
 		return personRoleServiceImpl.addPersonRole(personRole);
 	}
 	
+	//Get person roles
+	@GetMapping("/personroles")
+	public List<PersonRole> getPersonRoles() {
+		return personRoleServiceImpl.getPersonRoles();
+	}
+	
+	//Delete person role
+	@DeleteMapping("/personroles/delete/{id}")
+	public void deletePersonRoleById(@PathVariable("id")long id) {
+		personRoleServiceImpl.deletePersonRoleById(id);
+	}
 }
